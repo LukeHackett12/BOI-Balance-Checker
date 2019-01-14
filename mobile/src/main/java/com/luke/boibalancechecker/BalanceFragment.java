@@ -1,11 +1,20 @@
 package com.luke.boibalancechecker;
 
 import android.os.Bundle;
-import android.os.StrictMode;
+import android.support.annotation.NonNull;
+import android.support.design.button.MaterialButton;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -20,81 +29,33 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-public class MainActivity extends AppCompatActivity implements NavigationHost {
+class BalanceFragment extends Fragment {
 
     private ArrayList<String> cookies;
     private HttpsURLConnection conn;
 
     private final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0";
 
-    /*
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                .permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+    public View onCreateView(
+            @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_balance, container, false);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        TextView balanceText = view.findViewById(R.id.balanceText);
+        MaterialButton checkBalance = view.findViewById(R.id.checkBalance);
 
-        final Button button = findViewById(R.id.checkBalance);
-        button.setOnClickListener(v -> {
+        checkBalance.setOnClickListener(view1 -> {
             String balance = null;
             try {
                 balance = getBalance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            System.out.println(balance);
-
-            TextView tv = findViewById(R.id.balance);
-            tv.setText(balance);
+            balanceText.setText(balance);
         });
-    }
-     */
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                .permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-
-        if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.container, new SetupFragmentOne())
-                    .commit();
-        }
-    }
-
-    /**
-     * Navigate to the given fragment.
-     *
-     * @param fragment       Fragment to navigate to.
-     * @param addToBackstack Whether or not the current fragment should be added to the backstack.
-     */
-    @Override
-    public void navigateTo(Fragment fragment, boolean addToBackstack) {
-        FragmentTransaction transaction =
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.container, fragment);
-
-        if (addToBackstack) {
-            transaction.addToBackStack(null);
-        }
-
-        transaction.commit();
+        return view;
     }
 
     String getBalance() throws Exception {
@@ -105,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
 
         //================================ STAGE ONE START ===================================//
         String page = getPageContent(url);
-        String postParams = getStageOneParams(page, "60060354", "07", "04", "1999", "7544");
+        String postParams = getStageOneParams(page, "", "", "", "", "");
 
         page = sendPost("https://www.365online.com/online365/spring/authentication?execution=e1s1", postParams);
 
@@ -113,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
 
         //================================ STAGE TWO START =================================//
 
-        postParams = getStageTwoParams(page, "582978");
+        postParams = getStageTwoParams(page, "");
         page = sendPost("https://www.365online.com/online365/spring/authentication?execution=e1s2", postParams);
 
         //================================ STAGE TWO END ====================================//
