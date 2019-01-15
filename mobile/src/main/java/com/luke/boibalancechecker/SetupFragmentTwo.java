@@ -1,6 +1,9 @@
 package com.luke.boibalancechecker;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.button.MaterialButton;
@@ -13,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class SetupFragmentTwo extends Fragment {
+
+    private static final String BOI_ALIAS = "BOI";
 
     @Override
     public View onCreateView(
@@ -29,10 +34,20 @@ public class SetupFragmentTwo extends Fragment {
                 phoneNumberText.setError(getString(R.string.error_phone));
             } else {
                 phoneNumberText.setError(null); // Clear the error
+                addToPrefs(phoneNumberEdit);
                 ((NavigationHost) getActivity()).navigateTo(new SetupFragmentThree(), true); // Navigate to the next Fragment
             }
         });
         return view;
+    }
+
+    private void addToPrefs(TextInputEditText phoneEdit) {
+        SharedPreferences accountDetails = getActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = accountDetails.edit();
+
+        String stringEncrypted = KeyStoreHelper.encrypt(BOI_ALIAS, String.valueOf(phoneEdit.getText()));
+        editor.putString("phoneNum", stringEncrypted);
+        editor.apply();
     }
 
     boolean validPhoneNumber(@Nullable Editable text){

@@ -1,6 +1,9 @@
 package com.luke.boibalancechecker;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.button.MaterialButton;
@@ -12,7 +15,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.security.InvalidAlgorithmParameterException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+
+import static android.content.Context.MODE_PRIVATE;
+
 public class SetupFragmentOne extends Fragment {
+
+    public static final String BOI_ALIAS = "BOI";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,10 +39,24 @@ public class SetupFragmentOne extends Fragment {
                 accountInput.setError(getString(R.string.error_account));
             } else {
                 accountInput.setError(null); // Clear the error
+                try {
+                    addToPrefs(accountEdit);
+                } catch (InvalidAlgorithmParameterException | NoSuchAlgorithmException | NoSuchProviderException e) {
+                    e.printStackTrace();
+                }
                 ((NavigationHost) getActivity()).navigateTo(new SetupFragmentTwo(), true); // Navigate to the next Fragment
             }
         });
         return view;
+    }
+
+    private void addToPrefs(TextInputEditText accountEdit) throws InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException {
+        SharedPreferences accountDetails = getActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = accountDetails.edit();
+
+        String stringEncrypted = KeyStoreHelper.encrypt(BOI_ALIAS, String.valueOf(accountEdit.getText()));
+        editor.putString("accountID", stringEncrypted);
+        editor.apply();
     }
 
     boolean validAccountID(@Nullable Editable text){

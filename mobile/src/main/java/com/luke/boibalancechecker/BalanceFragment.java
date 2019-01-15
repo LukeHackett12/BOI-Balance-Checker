@@ -1,5 +1,7 @@
 package com.luke.boibalancechecker;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.button.MaterialButton;
@@ -29,7 +31,9 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-class BalanceFragment extends Fragment {
+import static com.luke.boibalancechecker.MainActivity.BOI_ALIAS;
+
+public class BalanceFragment extends Fragment {
 
     private ArrayList<String> cookies;
     private HttpsURLConnection conn;
@@ -64,9 +68,17 @@ class BalanceFragment extends Fragment {
         String url = "https://www.365online.com/online365";
         CookieHandler.setDefault(new CookieManager());
 
+        SharedPreferences accountDetails = getActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        String accountID = KeyStoreHelper.decrypt(BOI_ALIAS, accountDetails.getString("accountID", null));
+        String dobDate = KeyStoreHelper.decrypt(BOI_ALIAS, accountDetails.getString("dobDate", null));
+        String dobMonth = KeyStoreHelper.decrypt(BOI_ALIAS, accountDetails.getString("dobMonth", null));
+        String dobYear = KeyStoreHelper.decrypt(BOI_ALIAS, accountDetails.getString("dobYear", null));
+        String phoneNum = KeyStoreHelper.decrypt(BOI_ALIAS, accountDetails.getString("phoneNum", null));
+        String sixDigitCode = KeyStoreHelper.decrypt(BOI_ALIAS, accountDetails.getString("sixDigitCode", null));
+
         //================================ STAGE ONE START ===================================//
         String page = getPageContent(url);
-        String postParams = getStageOneParams(page, "", "", "", "", "");
+        String postParams = getStageOneParams(page, accountID, dobDate, dobMonth, dobYear, phoneNum);
 
         page = sendPost("https://www.365online.com/online365/spring/authentication?execution=e1s1", postParams);
 
@@ -74,7 +86,7 @@ class BalanceFragment extends Fragment {
 
         //================================ STAGE TWO START =================================//
 
-        postParams = getStageTwoParams(page, "");
+        postParams = getStageTwoParams(page, sixDigitCode);
         page = sendPost("https://www.365online.com/online365/spring/authentication?execution=e1s2", postParams);
 
         //================================ STAGE TWO END ====================================//
