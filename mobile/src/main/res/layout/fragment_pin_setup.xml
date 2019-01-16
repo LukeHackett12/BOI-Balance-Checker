@@ -20,7 +20,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="48dp"
             android:layout_marginBottom="16dp"
-            app:srcCompat="@drawable/logo" />
+            android:contentDescription="TODO" app:srcCompat="@drawable/logo" />
 
         <TextView
             android:layout_width="wrap_content"
