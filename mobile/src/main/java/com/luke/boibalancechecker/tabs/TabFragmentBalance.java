@@ -1,17 +1,19 @@
-package com.luke.boibalancechecker;
+package com.luke.boibalancechecker.tabs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.button.MaterialButton;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.luke.boibalancechecker.helpers.KeyStoreHelper;
+import com.luke.boibalancechecker.R;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,14 +28,17 @@ import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.KeyStore;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import static com.luke.boibalancechecker.MainActivity.BOI_ALIAS;
+import static com.luke.boibalancechecker.activities.MainActivity.BOI_ALIAS;
 
-public class BalanceFragment extends Fragment {
+public class TabFragmentBalance extends Fragment {
 
     private ArrayList<String> cookies;
     private HttpsURLConnection conn;
@@ -42,23 +47,31 @@ public class BalanceFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_balance, container, false);
 
         TextView balanceText = view.findViewById(R.id.balanceText);
-        MaterialButton checkBalance = view.findViewById(R.id.checkBalance);
+        MaterialButton checkBalance = view.findViewById(R.id.removeSettings);
+
+        ProgressBar spinner = view.findViewById(R.id.progressBar);
+        spinner.setVisibility(View.GONE);
 
         checkBalance.setOnClickListener(view1 -> {
-            String balance = null;
-            try {
-                balance = getBalance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            balanceText.setText(balance);
+            spinner.setVisibility(View.VISIBLE);
+            balanceText.setVisibility(View.GONE);
+
+            balanceText.post(() -> {
+                try {
+                    balanceText.setText(getBalance());
+                    spinner.setVisibility(View.GONE);
+                    balanceText.setVisibility(View.VISIBLE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
         });
+
         return view;
     }
 
@@ -69,12 +82,18 @@ public class BalanceFragment extends Fragment {
         CookieHandler.setDefault(new CookieManager());
 
         SharedPreferences accountDetails = getActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        String accountID = KeyStoreHelper.decrypt(BOI_ALIAS, accountDetails.getString("accountID", null));
-        String dobDate = KeyStoreHelper.decrypt(BOI_ALIAS, accountDetails.getString("dobDate", null));
-        String dobMonth = KeyStoreHelper.decrypt(BOI_ALIAS, accountDetails.getString("dobMonth", null));
-        String dobYear = KeyStoreHelper.decrypt(BOI_ALIAS, accountDetails.getString("dobYear", null));
-        String phoneNum = KeyStoreHelper.decrypt(BOI_ALIAS, accountDetails.getString("phoneNum", null));
-        String sixDigitCode = KeyStoreHelper.decrypt(BOI_ALIAS, accountDetails.getString("sixDigitCode", null));
+
+        KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
+        keyStore.load(null);
+
+        PrivateKey privateKey = (PrivateKey) keyStore.getKey(BOI_ALIAS, null);
+
+        String accountID = KeyStoreHelper.decrypt(privateKey, accountDetails.getString("accountID", null));
+        String dobDate = KeyStoreHelper.decrypt(privateKey, accountDetails.getString("dobDate", null));
+        String dobMonth = KeyStoreHelper.decrypt(privateKey, accountDetails.getString("dobMonth", null));
+        String dobYear = KeyStoreHelper.decrypt(privateKey, accountDetails.getString("dobYear", null));
+        String phoneNum = KeyStoreHelper.decrypt(privateKey, accountDetails.getString("phoneNum", null));
+        String sixDigitCode = KeyStoreHelper.decrypt(privateKey, accountDetails.getString("sixDigitCode", null));
 
         //================================ STAGE ONE START ===================================//
         String page = getPageContent(url);
@@ -96,10 +115,12 @@ public class BalanceFragment extends Fragment {
         ArrayList<Element> accounts = doc.getElementsByAttributeValueContaining("class", "acc_container_inner minHeight35px");
 
         for(Element account : accounts){
-            balances.append(account.getElementsByAttributeValue("class", "rich-tglctrl").text());
+            String accountString = account.getElementsByAttributeValue("class", "rich-tglctrl").text();
+            accountString = accountString.split(" ~ ")[0] + "(" + accountString.split(" ~ ")[1].split(":")[0] + ")";
+            balances.append(accountString);
             balances.append(": ");
             balances.append(account.getElementsByAttributeValueContaining("id", "balance").text());
-            balances.append("\n");
+            balances.append("\n\n");
         }
 
         //================================ END PARSE ACCOUNT BALANCES ============================//

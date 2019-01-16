@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/loginPageBackgroundColor"
-    tools:context=".LoginFragment">
+    android:background="@color/loginPageBackgroundColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,8 +20,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="48dp"
             android:layout_marginBottom="16dp"
-            app:srcCompat="@drawable/logo"
-            android:contentDescription="TODO" />
+            app:srcCompat="@drawable/logo" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Pin"
+            android:text="@string/choose_pin"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
             android:visibility="visible" />
@@ -55,7 +52,7 @@
                 android:gravity="center_horizontal">
 
                 <Button
-                    android:id="@+id/oneButton"
+                    android:id="@+id/button_1"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -71,7 +68,7 @@
                     android:theme="?attr/materialButtonStyle" />
 
                 <Button
-                    android:id="@+id/twoButton"
+                    android:id="@+id/button_2"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -87,7 +84,7 @@
                     android:theme="?attr/materialButtonStyle" />
 
                 <Button
-                    android:id="@+id/threeButton"
+                    android:id="@+id/button_3"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -109,7 +106,7 @@
                 android:gravity="center_horizontal">
 
                 <Button
-                    android:id="@+id/fourButton"
+                    android:id="@+id/button_4"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,7 +122,7 @@
                     android:theme="?attr/materialButtonStyle" />
 
                 <Button
-                    android:id="@+id/fiveButton"
+                    android:id="@+id/button_5"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -141,7 +138,7 @@
                     android:theme="?attr/materialButtonStyle" />
 
                 <Button
-                    android:id="@+id/sixButton"
+                    android:id="@+id/button_6"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -163,7 +160,7 @@
                 android:gravity="center_horizontal">
 
                 <Button
-                    android:id="@+id/sevenButton"
+                    android:id="@+id/button_7"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -179,7 +176,7 @@
                     android:theme="?attr/materialButtonStyle" />
 
                 <Button
-                    android:id="@+id/eightButton"
+                    android:id="@+id/button_8"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -195,7 +192,7 @@
                     android:theme="?attr/materialButtonStyle" />
 
                 <Button
-                    android:id="@+id/nineButton"
+                    android:id="@+id/button_9"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -217,7 +214,7 @@
                 android:gravity="center_horizontal">
 
                 <Button
-                    android:id="@+id/zeroButton"
+                    android:id="@+id/button_0"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

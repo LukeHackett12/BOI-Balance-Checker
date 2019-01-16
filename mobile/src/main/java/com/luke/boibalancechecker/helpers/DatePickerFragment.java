@@ -1,4 +1,4 @@
-package com.luke.boibalancechecker;
+package com.luke.boibalancechecker.helpers;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.luke.boibalancechecker.R;
+
 import org.w3c.dom.Text;
 
 import java.util.Calendar;
@@ -20,7 +22,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
     View viewPast;
 
-    DatePickerFragment(View v){
+    public DatePickerFragment(View v){
         this.viewPast = v;
     }
 

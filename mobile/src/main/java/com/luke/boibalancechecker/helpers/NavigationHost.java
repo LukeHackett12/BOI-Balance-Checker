@@ -1,4 +1,4 @@
-package com.luke.boibalancechecker;
+package com.luke.boibalancechecker.helpers;
 
 import android.support.v4.app.Fragment;
 

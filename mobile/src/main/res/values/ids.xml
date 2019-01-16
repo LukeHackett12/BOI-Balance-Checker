@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="removeButton" type="id" value="1"/>
+    <item name="pinButton" type="id" value="2" />
+</resources>

@@ -1,25 +1,25 @@
-package com.luke.boibalancechecker;
+package com.luke.boibalancechecker.setup;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.button.MaterialButton;
-import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.luke.boibalancechecker.helpers.KeyStoreHelper;
+import com.luke.boibalancechecker.helpers.NavigationHost;
+import com.luke.boibalancechecker.R;
+import com.luke.boibalancechecker.helpers.DatePickerFragment;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 

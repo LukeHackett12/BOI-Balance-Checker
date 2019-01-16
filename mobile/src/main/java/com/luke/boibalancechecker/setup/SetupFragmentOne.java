@@ -1,9 +1,8 @@
-package com.luke.boibalancechecker;
+package com.luke.boibalancechecker.setup;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.button.MaterialButton;
@@ -14,12 +13,15 @@ import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+
+import com.luke.boibalancechecker.helpers.KeyStoreHelper;
+import com.luke.boibalancechecker.helpers.NavigationHost;
+import com.luke.boibalancechecker.R;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class SetupFragmentOne extends Fragment {
 
@@ -33,6 +35,12 @@ public class SetupFragmentOne extends Fragment {
         final TextInputLayout accountInput = view.findViewById(R.id.textInputID);
         final TextInputEditText accountEdit = view.findViewById(R.id.textEditID);
         MaterialButton nextButton = view.findViewById(R.id.progressSetup);
+
+        accountEdit.post(() -> {
+            accountEdit.requestFocus();
+            InputMethodManager imgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imgr.showSoftInput(accountEdit, InputMethodManager.SHOW_IMPLICIT);
+        });
 
         nextButton.setOnClickListener(view1 -> {
             if (!validAccountID(accountEdit.getText())) {

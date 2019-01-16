@@ -1,35 +1,25 @@
-package com.luke.boibalancechecker;
+package com.luke.boibalancechecker.activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.CookieHandler;
-import java.net.CookieManager;
-import java.net.URL;
-import java.net.URLEncoder;
+import com.luke.boibalancechecker.R;
+import com.luke.boibalancechecker.adapters.PagerAdapter;
+import com.luke.boibalancechecker.helpers.KeyStoreHelper;
+import com.luke.boibalancechecker.helpers.NavigationHost;
+import com.luke.boibalancechecker.setup.SetupFragmentZero;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.net.ssl.HttpsURLConnection;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 public class MainActivity extends AppCompatActivity implements NavigationHost {
 
@@ -57,27 +47,42 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
             case 0:
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .add(R.id.container, new SetupFragmentOne())
+                        .add(R.id.container, new SetupFragmentZero())
                         .commit();
                 break;
             case 1:
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .add(R.id.container, new BalanceFragment())
-                        .commit();
+                setContentView(R.layout.activity_app);
+                Toolbar toolbar =  findViewById(R.id.toolbar);
+                setSupportActionBar(toolbar);
+
+                TabLayout tabLayout = findViewById(R.id.tab_layout);
+                tabLayout.addTab(tabLayout.newTab().setText("Account Balance"));
+                tabLayout.addTab(tabLayout.newTab().setText("Settings"));
+                tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+                final ViewPager viewPager = findViewById(R.id.pager);
+                final PagerAdapter adapter = new PagerAdapter
+                        (getSupportFragmentManager(), tabLayout.getTabCount());
+                viewPager.setAdapter(adapter);
+                viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+                tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        viewPager.setCurrentItem(tab.getPosition());
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+
+                    }
+                });
                 break;
         }
-
-        /*
-        if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.container, new SetupFragmentOne())
-                    .commit();
-        } else {
-            System.out.println("Here");
-        }
-        */
     }
 
     /**
@@ -91,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         FragmentTransaction transaction =
                 getSupportFragmentManager()
                         .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
                         .replace(R.id.container, fragment);
 
         if (addToBackstack) {
@@ -99,5 +105,4 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
 
         transaction.commit();
     }
-
 }

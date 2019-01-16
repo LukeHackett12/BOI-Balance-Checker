@@ -1,9 +1,8 @@
-package com.luke.boibalancechecker;
+package com.luke.boibalancechecker.setup;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.button.MaterialButton;
@@ -14,6 +13,11 @@ import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+
+import com.luke.boibalancechecker.helpers.KeyStoreHelper;
+import com.luke.boibalancechecker.helpers.NavigationHost;
+import com.luke.boibalancechecker.R;
 
 public class SetupFragmentTwo extends Fragment {
 
@@ -28,6 +32,12 @@ public class SetupFragmentTwo extends Fragment {
         final TextInputLayout phoneNumberText = view.findViewById(R.id.textInputID);
         final TextInputEditText phoneNumberEdit = view.findViewById(R.id.textEditID);
         MaterialButton nextButton = view.findViewById(R.id.progressSetup);
+
+        phoneNumberEdit.post(() -> {
+            phoneNumberEdit.requestFocus();
+            InputMethodManager imgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imgr.showSoftInput(phoneNumberEdit, InputMethodManager.SHOW_IMPLICIT);
+        });
 
         nextButton.setOnClickListener(view1 -> {
             if (!validPhoneNumber(phoneNumberEdit.getText())) {

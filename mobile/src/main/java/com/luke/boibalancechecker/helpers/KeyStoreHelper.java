@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.luke.boibalancechecker;
+package com.luke.boibalancechecker.helpers;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -182,9 +182,30 @@ public class KeyStoreHelper {
         }
     }
 
+    public static String encrypt(PublicKey publicKey, String plaintext) {
+        try {
+            Cipher cipher = getCipher();
+            cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+            return Base64.encodeToString(cipher.doFinal(plaintext.getBytes()), Base64.NO_WRAP);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public static String decrypt(String alias, String ciphertext) {
         try {
             PrivateKey privateKey = getPrivateKeyEntry(alias).getPrivateKey();
+            Cipher cipher = getCipher();
+            cipher.init(Cipher.DECRYPT_MODE, privateKey);
+            return new String(cipher.doFinal(Base64.decode(ciphertext, Base64.NO_WRAP)));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String decrypt(PrivateKey privateKey, String ciphertext) {
+        try {
             Cipher cipher = getCipher();
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
             return new String(cipher.doFinal(Base64.decode(ciphertext, Base64.NO_WRAP)));
