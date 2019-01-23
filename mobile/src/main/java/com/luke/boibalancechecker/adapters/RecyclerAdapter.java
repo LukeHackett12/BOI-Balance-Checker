@@ -2,7 +2,6 @@ package com.luke.boibalancechecker.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
@@ -16,10 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.luke.boibalancechecker.R;
-import com.luke.boibalancechecker.activities.SetupLoginActivity;
+import com.luke.boibalancechecker.setup.SetupLoginActivity;
 import com.luke.boibalancechecker.helpers.KeyStoreHelper;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.security.KeyStore;
@@ -30,7 +27,7 @@ import java.security.PublicKey;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 
-import static com.luke.boibalancechecker.activities.MainActivity.BOI_ALIAS;
+import static com.luke.boibalancechecker.views.MainActivity.BOI_ALIAS;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
     private String[] options;
@@ -195,7 +192,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             SharedPreferences accountDetails = holder.view.getContext().getSharedPreferences("Settings", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = accountDetails.edit();
 
-            editor.putInt("stage", 0);
+            PublicKey publicKey = null;
+            try {
+                KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
+                keyStore.load(null);
+                publicKey = keyStore.getCertificate(BOI_ALIAS).getPublicKey();
+            } catch (Exception ignore){
+
+            }
+            editor.putString("stage", KeyStoreHelper.encrypt(publicKey, "0"));
             editor.apply();
 
             Toast.makeText(holder.view.getContext(), "Deleted Information", Toast.LENGTH_SHORT).show();

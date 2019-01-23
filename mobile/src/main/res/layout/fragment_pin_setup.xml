@@ -1,238 +1,328 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/loginPageBackgroundColor">
 
-    <LinearLayout
+    <Button
+        android:id="@+id/button_0"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:padding="20dp"
+        android:text="0"
+
+        android:textAlignment="center"
+        android:textColor="@color/darkerGrey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:theme="?attr/materialButtonStyle"
+        app:layout_constraintEnd_toEndOf="@+id/button_8"
+        app:layout_constraintStart_toStartOf="@+id/button_8"
+        app:layout_constraintTop_toBottomOf="@+id/button_8" />
+
+    <Button
+        android:id="@+id/button_9"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:padding="20dp"
+        android:text="9"
+
+        android:textAlignment="center"
+        android:textColor="@color/darkerGrey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:theme="?attr/materialButtonStyle"
+        app:layout_constraintStart_toEndOf="@+id/button_8"
+        app:layout_constraintTop_toBottomOf="@+id/button_6" />
+
+    <Button
+        android:id="@+id/button_7"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:padding="20dp"
+        android:text="7"
+
+        android:textAlignment="center"
+        android:textColor="@color/darkerGrey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:theme="?attr/materialButtonStyle"
+        app:layout_constraintEnd_toStartOf="@+id/button_8"
+        app:layout_constraintTop_toBottomOf="@+id/button_4" />
+
+    <Button
+        android:id="@+id/button_8"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:padding="20dp"
+
+        android:text="8"
+        android:textAlignment="center"
+        android:textColor="@color/darkerGrey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:theme="?attr/materialButtonStyle"
+        app:layout_constraintEnd_toEndOf="@+id/button_5"
+        app:layout_constraintStart_toStartOf="@+id/button_5"
+        app:layout_constraintTop_toBottomOf="@+id/button_5" />
+
+    <Button
+        android:id="@+id/button_4"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:padding="20dp"
+        android:text="4"
+
+        android:textAlignment="center"
+        android:textColor="@color/darkerGrey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:theme="?attr/materialButtonStyle"
+        app:layout_constraintEnd_toStartOf="@+id/button_5"
+        app:layout_constraintTop_toBottomOf="@+id/button_1" />
+
+    <Button
+        android:id="@+id/button_5"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:padding="20dp"
+        android:text="5"
+
+        android:textAlignment="center"
+        android:textColor="@color/darkerGrey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:theme="?attr/materialButtonStyle"
+        app:layout_constraintEnd_toEndOf="@+id/button_2"
+        app:layout_constraintStart_toStartOf="@+id/button_2"
+        app:layout_constraintTop_toBottomOf="@+id/button_2" />
+
+    <Button
+        android:id="@+id/button_6"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:padding="20dp"
+        android:text="6"
+
+        android:textAlignment="center"
+        android:textColor="@color/darkerGrey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:theme="?attr/materialButtonStyle"
+        app:layout_constraintStart_toEndOf="@+id/button_5"
+        app:layout_constraintTop_toBottomOf="@+id/button_3" />
+
+    <Button
+        android:id="@+id/button_2"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:padding="20dp"
+        android:text="2"
+        android:textAlignment="center"
+        android:textColor="@color/darkerGrey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:theme="?attr/materialButtonStyle"
+        app:layout_constraintEnd_toStartOf="@+id/button_3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_1"
+        app:layout_constraintTop_toBottomOf="@+id/pinDots" />
+
+    <Button
+        android:id="@+id/button_1"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="65dp"
+        android:layout_marginEnd="8dp"
+
+        android:backgroundTint="@color/colorPrimary"
+        android:padding="20dp"
+        android:text="1"
+        android:textAlignment="center"
+        android:textColor="@color/darkerGrey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:theme="?attr/materialButtonStyle"
+        app:layout_constraintEnd_toStartOf="@+id/button_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_2" />
+
+    <Button
+        android:id="@+id/button_3"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="66dp"
+        android:backgroundTint="@color/colorPrimary"
+
+        android:padding="20dp"
+        android:text="3"
+        android:textAlignment="center"
+        android:textColor="@color/darkerGrey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:theme="?attr/materialButtonStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_2"
+        app:layout_constraintTop_toTopOf="@+id/button_2" />
+
+    <TextView
+        android:id="@+id/textPrompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="4dp"
+        android:paddingBottom="12dp"
+        android:text="Choose Pin"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pinDots"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+
+    <LinearLayout
+        android:id="@+id/pinDots"
+        style="@style/AppTheme"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="120dp"
+        android:background="@android:color/white"
+        android:backgroundTint="@color/colorPrimary"
+        android:clickable="false"
         android:clipChildren="false"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:paddingTop="16dp">
+        android:fadeScrollbars="false"
+        android:orientation="horizontal"
+        android:requiresFadingEdge="none"
+        android:transitionGroup="false"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView13">
 
         <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="48dp"
-            android:layout_marginBottom="16dp"
-            android:contentDescription="TODO" app:srcCompat="@drawable/logo" />
-
-        <TextView
+            android:id="@+id/pindigit_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="100dp"
-            android:text="@string/app_name"
-            android:textAllCaps="true"
-            android:textSize="16sp" />
+            android:layout_weight="5"
+            android:background="@android:color/white"
+            android:padding="0dp"
+            android:visibility="visible"
+            app:srcCompat="@drawable/circle" />
 
-        <TextView
-            android:id="@+id/pinDisplay"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/pindigit_2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="@string/choose_pin"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-            android:visibility="visible" />
+            android:layout_weight="5"
+            android:background="@android:color/white"
+            android:padding="0dp"
+            android:visibility="visible"
+            app:srcCompat="@drawable/circle" />
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical">
+        <ImageView
+            android:id="@+id/pindigit_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:background="@android:color/white"
+            android:padding="0dp"
+            android:visibility="visible"
+            app:srcCompat="@drawable/circle" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal">
+        <ImageView
+            android:id="@+id/pindigit_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:background="@android:color/white"
+            android:padding="0dp"
+            android:visibility="visible"
+            app:srcCompat="@drawable/circle" />
 
-                <Button
-                    android:id="@+id/button_1"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:padding="20dp"
-                    android:text="1"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:theme="?attr/materialButtonStyle" />
+        <ImageView
+            android:id="@+id/pindigit_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:background="@android:color/white"
+            android:padding="0dp"
+            android:visibility="visible"
+            app:srcCompat="@drawable/circle" />
 
-                <Button
-                    android:id="@+id/button_2"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:padding="20dp"
-                    android:text="2"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:theme="?attr/materialButtonStyle" />
-
-                <Button
-                    android:id="@+id/button_3"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:padding="20dp"
-                    android:text="3"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:theme="?attr/materialButtonStyle" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal">
-
-                <Button
-                    android:id="@+id/button_4"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:padding="20dp"
-                    android:text="4"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:theme="?attr/materialButtonStyle" />
-
-                <Button
-                    android:id="@+id/button_5"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:padding="20dp"
-                    android:text="5"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:theme="?attr/materialButtonStyle" />
-
-                <Button
-                    android:id="@+id/button_6"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:padding="20dp"
-                    android:text="6"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:theme="?attr/materialButtonStyle" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal">
-
-                <Button
-                    android:id="@+id/button_7"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:padding="20dp"
-                    android:text="7"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:theme="?attr/materialButtonStyle" />
-
-                <Button
-                    android:id="@+id/button_8"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:padding="20dp"
-                    android:text="8"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:theme="?attr/materialButtonStyle" />
-
-                <Button
-                    android:id="@+id/button_9"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:padding="20dp"
-                    android:text="9"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:theme="?attr/materialButtonStyle" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal">
-
-                <Button
-                    android:id="@+id/button_0"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:padding="20dp"
-                    android:text="0"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:theme="?attr/materialButtonStyle" />
-            </TableRow>
-        </TableLayout>
-
-        <!-- Snippet from "Add text fields" section goes here. -->
-        <!-- Snippet from "Add buttons" section goes here. -->
-
+        <ImageView
+            android:id="@+id/pindigit_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:background="@android:color/white"
+            android:padding="0dp"
+            android:visibility="visible"
+            app:srcCompat="@drawable/circle" />
     </LinearLayout>
-</ScrollView>
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="59dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="128dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/pinText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textPrompt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+
+</android.support.constraint.ConstraintLayout>

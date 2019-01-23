@@ -228,8 +228,6 @@ public class KeyStoreHelper {
         String PADDING_TYPE = "PKCS1Padding";
         String BLOCKING_MODE = "NONE";
 
-        String SIGNATURE_SHA256withRSA = "SHA256withRSA";
-        String SIGNATURE_SHA512withRSA = "SHA512withRSA";
     }
 
 }

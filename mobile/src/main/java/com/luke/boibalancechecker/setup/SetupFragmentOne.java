@@ -15,13 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
+import com.luke.boibalancechecker.R;
 import com.luke.boibalancechecker.helpers.KeyStoreHelper;
 import com.luke.boibalancechecker.helpers.NavigationHost;
-import com.luke.boibalancechecker.R;
-
-import java.security.InvalidAlgorithmParameterException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 
 public class SetupFragmentOne extends Fragment {
 
@@ -47,18 +43,14 @@ public class SetupFragmentOne extends Fragment {
                 accountInput.setError(getString(R.string.error_account));
             } else {
                 accountInput.setError(null); // Clear the error
-                try {
-                    addToPrefs(accountEdit);
-                } catch (InvalidAlgorithmParameterException | NoSuchAlgorithmException | NoSuchProviderException e) {
-                    e.printStackTrace();
-                }
+                addToPrefs(accountEdit);
                 ((NavigationHost) getActivity()).navigateTo(new SetupFragmentTwo(), true); // Navigate to the next Fragment
             }
         });
         return view;
     }
 
-    private void addToPrefs(TextInputEditText accountEdit) throws InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException {
+    private void addToPrefs(TextInputEditText accountEdit) {
         SharedPreferences accountDetails = getActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = accountDetails.edit();
 

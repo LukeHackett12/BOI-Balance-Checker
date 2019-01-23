@@ -30,13 +30,12 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.security.KeyStore;
 import java.security.PrivateKey;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import static com.luke.boibalancechecker.activities.MainActivity.BOI_ALIAS;
+import static com.luke.boibalancechecker.views.MainActivity.BOI_ALIAS;
 
 public class TabFragmentBalance extends Fragment {
 

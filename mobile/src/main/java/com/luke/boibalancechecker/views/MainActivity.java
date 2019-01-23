@@ -1,6 +1,7 @@
-package com.luke.boibalancechecker.activities;
+package com.luke.boibalancechecker.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -15,11 +16,18 @@ import com.luke.boibalancechecker.R;
 import com.luke.boibalancechecker.adapters.PagerAdapter;
 import com.luke.boibalancechecker.helpers.KeyStoreHelper;
 import com.luke.boibalancechecker.helpers.NavigationHost;
+import com.luke.boibalancechecker.login.LoginActivity;
 import com.luke.boibalancechecker.setup.SetupFragmentZero;
 
+import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.security.PrivateKey;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 
 public class MainActivity extends AppCompatActivity implements NavigationHost {
 
@@ -41,9 +49,42 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         }
 
         SharedPreferences prefs = getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        int stage = prefs.getInt("stage", 0);
 
-        switch (stage) {
+
+        KeyStore keyStore = null;
+        try {
+            keyStore = KeyStore.getInstance("AndroidKeyStore");
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        }
+        try {
+            keyStore.load(null);
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        PrivateKey privateKey = null;
+        try {
+            privateKey = (PrivateKey) keyStore.getKey(BOI_ALIAS, null);
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnrecoverableKeyException e) {
+            e.printStackTrace();
+        }
+        String stage = "0";
+        try {
+            stage = KeyStoreHelper.decrypt(privateKey, prefs.getString("stage", null));
+        } catch (Exception e){
+            System.out.println("KeyStore fucked up");
+        }
+
+        switch (Integer.parseInt(stage)) {
             case 0:
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -65,24 +106,32 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                         (getSupportFragmentManager(), tabLayout.getTabCount());
                 viewPager.setAdapter(adapter);
                 viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-                tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                    @Override
-                    public void onTabSelected(TabLayout.Tab tab) {
-                        viewPager.setCurrentItem(tab.getPosition());
-                    }
-
-                    @Override
-                    public void onTabUnselected(TabLayout.Tab tab) {
-
-                    }
-
-                    @Override
-                    public void onTabReselected(TabLayout.Tab tab) {
-
-                    }
-                });
+                defaultTabLayoutCreation(tabLayout, viewPager);
+                break;
+            case 2:
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
                 break;
         }
+    }
+
+    private void defaultTabLayoutCreation(TabLayout tabLayout, ViewPager viewPager) {
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     /**

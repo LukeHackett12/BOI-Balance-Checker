@@ -1,4 +1,4 @@
-package com.luke.boibalancechecker.activities;
+package com.luke.boibalancechecker.views;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import com.luke.boibalancechecker.R;
 import com.luke.boibalancechecker.adapters.PagerAdapter;
 
-public class AppActivity extends AppCompatActivity {
+public class BalanceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

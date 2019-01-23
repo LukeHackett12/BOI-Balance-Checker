@@ -1,4 +1,4 @@
-package com.luke.boibalancechecker.activities;
+package com.luke.boibalancechecker.setup;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.luke.boibalancechecker.R;
 import com.luke.boibalancechecker.helpers.NavigationHost;
-import com.luke.boibalancechecker.setup.SetupFragmentPinEnter;
 
 public class SetupLoginActivity extends AppCompatActivity implements NavigationHost {
     @Override
@@ -17,7 +16,7 @@ public class SetupLoginActivity extends AppCompatActivity implements NavigationH
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.container, new SetupFragmentPinEnter())
+                .add(R.id.container, new SetupFragmentPin())
                 .commit();
     }
 

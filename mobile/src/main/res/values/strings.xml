@@ -95,4 +95,10 @@
     <string name="delete_account">Reset App</string>
     <string name="add_pin">Enable Pin</string>
     <string name="choose_pin">Choose Pin...</string>
+    <string name="pin">Pin</string>
+    <string name="confirm_pin">Confirm Pin</string>
+    <string name="enter_pin">Enter Pin</string>
+    <string name="instructions">
+        Place your fingertip on the Home button to verify your identity
+    </string>
 </resources>

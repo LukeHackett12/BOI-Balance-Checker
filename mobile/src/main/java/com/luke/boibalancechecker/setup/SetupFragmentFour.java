@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
-import com.luke.boibalancechecker.activities.AppActivity;
+import com.luke.boibalancechecker.views.BalanceActivity;
 import com.luke.boibalancechecker.helpers.KeyStoreHelper;
 import com.luke.boibalancechecker.R;
 
@@ -47,7 +47,7 @@ public class SetupFragmentFour extends Fragment {
                 sixDigitPinText.setError(null); // Clear the error
                 addToPrefs(sixDigitPinEdit);
                 //((NavigationHost) getActivity()).navigateTo(new TagFragmentBalance(), true); // Navigate to the next Fragment
-                Intent intent = new Intent(this.getContext(), AppActivity.class);
+                Intent intent = new Intent(this.getContext(), BalanceActivity.class);
                 startActivity(intent);
             }
         });
@@ -61,7 +61,7 @@ public class SetupFragmentFour extends Fragment {
         String stringEncrypted;
         stringEncrypted = KeyStoreHelper.encrypt(BOI_ALIAS, String.valueOf(sixDigitPin.getText()));
         editor.putString("sixDigitCode", stringEncrypted);
-        editor.putInt("stage", 1);
+        editor.putString("stage", KeyStoreHelper.encrypt(BOI_ALIAS, "1"));
         editor.apply();
     }
 
