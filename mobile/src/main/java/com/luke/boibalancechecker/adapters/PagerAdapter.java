@@ -9,11 +9,11 @@ import com.luke.boibalancechecker.tabs.TabFragmentBalance;
 import com.luke.boibalancechecker.tabs.TabFragmentSettings;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
-    int mNumOfTabs;
+    int numOfTabs;
 
-    public PagerAdapter(FragmentManager fm, int NumOfTabs) {
+    public PagerAdapter(FragmentManager fm, int numOfTabs) {
         super(fm);
-        this.mNumOfTabs = NumOfTabs;
+        this.numOfTabs = numOfTabs;
     }
 
     @Override
@@ -31,6 +31,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return mNumOfTabs;
+        return numOfTabs;
     }
 }
